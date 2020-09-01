@@ -1,0 +1,9 @@
+     var links = [];
+        var contents = fs.readFileSync('idealista.txt', 'utf8');
+        links = contents.split(/\r?\n/)
+        // Check all the links if it is a new one
+        var diff = (links.length - 10) <= 0 ? 0 : (links.length - 11);
+        for (let index = diff; index < links.length; index++) {
+            if (links[index] != "")
+                bot.sendMessage(msg.chat.id, links[index])
+        }

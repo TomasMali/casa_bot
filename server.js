@@ -116,7 +116,7 @@ bot.on("message", (msg) => {
 /**
  * CronTab Immobiliare.i
  */
-cron.schedule("*/20 8-20 * * *", () => {
+cron.schedule("*/10 8-21 * * *", () => {
     // Immobiliare.it ##################################################################################################################
 
     var finalImobiliareURL = "";

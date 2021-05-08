@@ -23,21 +23,23 @@ const IDEALISTA = "\ud83d\udde3 Idealista.it"
 
 inline_keyboard = [];
 
-const immobiliareLink = "https://www.immobiliare.it/vendita-case/selvazzano-dentro/?criterio=rilevanza&prezzoMinimo=50000&prezzoMassimo=140000&idMZona[]=11150&idMZona[]=11149&idMZona[]=11148"
-const immobiliarePageNexts = "https://www.immobiliare.it/vendita-case/selvazzano-dentro/?criterio=rilevanza&prezzoMinimo=50000&prezzoMassimo=140000&idMZona[]=11150&idMZona[]=11149&idMZona[]=11148&pag="
+const immobiliareLink = "https://www.immobiliare.it/vendita-case/selvazzano-dentro/?criterio=rilevanza&prezzoMinimo=50000&prezzoMassimo=190000&superficieMinima=100&idMZona[]=11150&idMZona[]=11149&idMZona[]=11148&idMZona[]=104&idMZona[]=105"
+const immobiliarePageNexts = "https://www.immobiliare.it/vendita-case/selvazzano-dentro/?criterio=rilevanza&prezzoMinimo=50000&prezzoMassimo=190000&superficieMinima=100&idMZona[]=11150&idMZona[]=11149&idMZona[]=11148&idMZona[]=104&idMZona[]=105&pag="
 
-const casaLink = "https://www.casa.it/vendita/residenziale/selvazzano-dentro?priceMin=40000&priceMax=140000&page="
+const casaLink = "https://www.casa.it/vendita/residenziale/selvazzano-dentro?priceMin=40000&mqMin=100&priceMax=190000&page="
+const casaLinkPadovaAnche = "https://www.casa.it/srp/?tr=vendita&mqMin=100&priceMin=40000&priceMax=190000&propertyTypeGroup=case&q=7bdd3da8%2C64f24246%2Cdcbe6f3c%2C4e5dbec1%2Cd0b19401%2C07abe6d0%2C78a38c93%2C0343f5cc%2Cc29a206e%2C6f9640c8%2C0afdac10&page="
 
-const subitoUrl = "https://www.subito.it/annunci-veneto/vendita/appartamenti/padova/selvazzano-dentro/?q=casa&ps=50000&pe=130000"
+const subitoUrl = "https://www.subito.it/annunci-veneto/vendita/appartamenti/padova/selvazzano-dentro/?q=casa&ps=50000&pe=190000&szs=100"
+const subitoPadovaAnche = "https://www.subito.it/annunci-veneto/vendita/appartamenti/padova/padova/?q=casa&ps=50000&pe=190000&szs=100"
 
 
 // Here starts everything
 bot.onText(/\/start/, (msg) => {
     var telegramUser = msg.from
-    // Aggiorno il file 
+        // Aggiorno il file 
     const usersFile = fs.readFileSync('users.txt').toString()
     if (!usersFile.includes(msg.chat.id)) {
-        fs.writeFile('users.txt', usersFile + msg.chat.id + "\n", 'utf-8', function (err) {
+        fs.writeFile('users.txt', usersFile + msg.chat.id + "\n", 'utf-8', function(err) {
             if (err) throw err;
             console.log('UsersAsinc complete');
         });
@@ -62,7 +64,7 @@ bot.on('message', (msg) => {
         var links = [];
         var contents = fs.readFileSync('immobiliare.txt', 'utf8');
         links = contents.split(/\r?\n/)
-        // Check all the links if it is a new one
+            // Check all the links if it is a new one
         var diff = (links.length - 10) <= 0 ? 0 : (links.length - 11);
         for (let index = diff; index < links.length; index++) {
             if (links[index] != "")
@@ -74,7 +76,7 @@ bot.on('message', (msg) => {
         var links = [];
         var contents = fs.readFileSync('case.txt', 'utf8');
         links = contents.split(/\r?\n/)
-        // Check all the links if it is a new one
+            // Check all the links if it is a new one
         var diff = (links.length - 10) <= 0 ? 0 : (links.length - 11);
         for (let index = diff; index < links.length; index++) {
             if (links[index] != "")
@@ -88,14 +90,13 @@ bot.on('message', (msg) => {
         var links = [];
         var contents = fs.readFileSync('subito.txt', 'utf8');
         links = contents.split(/\r?\n/)
-        // Check all the links if it is a new one
+            // Check all the links if it is a new one
         var diff = (links.length - 10) <= 0 ? 0 : (links.length - 11);
         for (let index = diff; index < links.length; index++) {
             if (links[index] != "")
                 bot.sendMessage(msg.chat.id, links[index])
         }
-    }
-    else {
+    } else {
         if (msg.text.toString() != "/start")
             bot.sendMessage(msg.chat.id, "Commando non riconosciuto!")
     }
@@ -138,7 +139,7 @@ cron.schedule("*/20 8-20 * * *", () => {
 
                 var links = [];
                 var img = []
-                let main = $(".listing-item ").each(function () {
+                let main = $(".listing-item ").each(function() {
                     const t = $(this).find("a[data-row-link]")
 
                     if (t.attr('href') !== undefined && t.attr('href')) {
@@ -151,12 +152,13 @@ cron.schedule("*/20 8-20 * * *", () => {
                     //   const y = $(this).find('div[data-role="foto-gallery"]').first().find("img")
                     //   img.push(y.attr("src"))
                 });
+
                 // Check all the links if it is a new one
                 links.forEach(el => {
                     var contents = fs.readFileSync('immobiliare.txt', 'utf8');
                     // check if a line is not included
                     if (contents.toString().indexOf(el.toString()) === -1) {
-                        fs.writeFileSync('immobiliare.txt', contents + el + "\n", 'utf-8', function (err) {
+                        fs.writeFileSync('immobiliare.txt', contents + el + "\n", 'utf-8', function(err) {
                             if (err) throw err;
                         });
 
@@ -165,7 +167,7 @@ cron.schedule("*/20 8-20 * * *", () => {
                         var lineReader = readline.createInterface({
                             input: require('fs').createReadStream('users.txt')
                         });
-                        lineReader.on('line', function (line) {
+                        lineReader.on('line', function(line) {
                             if (line !== "")
                                 bot.sendMessage(line, el)
                         });
@@ -196,7 +198,7 @@ cron.schedule("*/20 8-20 * * *", () => {
 
                 var links = [];
 
-                let main = $("article").each(function () {
+                let main = $("article").each(function() {
                     const t = $(this).find("a[title]")
 
                     if (t.attr('href') !== undefined && t.attr('href')) {
@@ -213,7 +215,7 @@ cron.schedule("*/20 8-20 * * *", () => {
                     var contents = fs.readFileSync('case.txt', 'utf8');
                     // check if a line is not included
                     if (contents.toString().indexOf(el.toString()) === -1) {
-                        fs.writeFileSync('case.txt', contents + el + "\n", 'utf-8', function (err) {
+                        fs.writeFileSync('case.txt', contents + el + "\n", 'utf-8', function(err) {
                             if (err) throw err;
                         });
 
@@ -223,7 +225,59 @@ cron.schedule("*/20 8-20 * * *", () => {
                         var lineReader = readline.createInterface({
                             input: require('fs').createReadStream('users.txt')
                         });
-                        lineReader.on('line', function (line) {
+                        lineReader.on('line', function(line) {
+                            if (line !== "")
+                                bot.sendMessage(line, el)
+                        });
+
+
+                    }
+
+                })
+
+
+            };
+
+        });
+
+
+        // Padova anche 
+
+        request(casaLinkPadovaAnche + i.toString(), (error, response, html) => {
+
+            if (!error && response.statusCode == 200) {
+                const $ = cheerio.load(html);
+
+                var links = [];
+
+                let main = $("article").each(function() {
+                    const t = $(this).find("a[title]")
+
+                    if (t.attr('href') !== undefined && t.attr('href')) {
+
+
+                        var elemento = t.attr('href')
+
+                        links.push("www.casa.it" + elemento);
+                    }
+
+                });
+
+                links.forEach(el => {
+                    var contents = fs.readFileSync('case.txt', 'utf8');
+                    // check if a line is not included
+                    if (contents.toString().indexOf(el.toString()) === -1) {
+                        fs.writeFileSync('case.txt', contents + el + "\n", 'utf-8', function(err) {
+                            if (err) throw err;
+                        });
+
+
+
+                        // Send bradcast
+                        var lineReader = readline.createInterface({
+                            input: require('fs').createReadStream('users.txt')
+                        });
+                        lineReader.on('line', function(line) {
                             if (line !== "")
                                 bot.sendMessage(line, el)
                         });
@@ -258,7 +312,7 @@ cron.schedule("*/20 8-20 * * *", () => {
 
             var links = [];
 
-            let main = $("#layout > main > div.jsx-206193370 > div.jsx-206193370.container > div.jsx-206193370.col.items > div.jsx-59941399.container > div.jsx-59941399.items.visible > div").each(function () {
+            let main = $("#layout > main > div.jsx-206193370 > div.jsx-206193370.container > div.jsx-206193370.col.items > div.jsx-59941399.container > div.jsx-59941399.items.visible > div").each(function() {
                 const t = $(this).find("a[href]")
 
 
@@ -276,7 +330,7 @@ cron.schedule("*/20 8-20 * * *", () => {
                 var contents = fs.readFileSync('subito.txt', 'utf8');
                 // check if a line is not included
                 if (contents.toString().indexOf(el.toString()) === -1) {
-                    fs.writeFileSync('subito.txt', contents + el + "\n", 'utf-8', function (err) {
+                    fs.writeFileSync('subito.txt', contents + el + "\n", 'utf-8', function(err) {
                         if (err) throw err;
                     });
 
@@ -285,7 +339,59 @@ cron.schedule("*/20 8-20 * * *", () => {
                     var lineReader = readline.createInterface({
                         input: require('fs').createReadStream('users.txt')
                     });
-                    lineReader.on('line', function (line) {
+                    lineReader.on('line', function(line) {
+                        if (line !== "")
+                            bot.sendMessage(line, el)
+                    });
+
+
+                }
+
+            })
+
+        }
+
+    })
+
+
+    // Subito.it Anche  ##################################################################################################################
+    request(subitoPadovaAnche, (error, response, html) => {
+
+        console.log(response.statusCode)
+        if (!error && response.statusCode == 200) {
+
+            const $ = cheerio.load(html);
+
+            var links = [];
+
+            let main = $("#layout > main > div.jsx-206193370 > div.jsx-206193370.container > div.jsx-206193370.col.items > div.jsx-59941399.container > div.jsx-59941399.items.visible > div").each(function() {
+                const t = $(this).find("a[href]")
+
+
+                if (t.attr('href') !== undefined && t.attr('href')) {
+
+
+                    var elemento = t.attr('href')
+
+                    links.push(elemento);
+                }
+
+            });
+
+            links.forEach(el => {
+                var contents = fs.readFileSync('subito.txt', 'utf8');
+                // check if a line is not included
+                if (contents.toString().indexOf(el.toString()) === -1) {
+                    fs.writeFileSync('subito.txt', contents + el + "\n", 'utf-8', function(err) {
+                        if (err) throw err;
+                    });
+
+
+                    // Send bradcast
+                    var lineReader = readline.createInterface({
+                        input: require('fs').createReadStream('users.txt')
+                    });
+                    lineReader.on('line', function(line) {
                         if (line !== "")
                             bot.sendMessage(line, el)
                     });
@@ -302,35 +408,3 @@ cron.schedule("*/20 8-20 * * *", () => {
 
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

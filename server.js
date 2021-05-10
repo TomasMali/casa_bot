@@ -43,7 +43,7 @@ const subitoUrl =
 const subitoPadovaAnche =
     "https://www.subito.it/annunci-veneto/vendita/appartamenti/padova/padova/?q=casa&ps=50000&pe=190000&szs=100";
 
-    const subitoAbano = "https://www.subito.it/annunci-veneto/vendita/appartamenti/padova/abano-terme/?q=casa&ps=50000&pe=190000&szs=100"
+const subitoAbano = "https://www.subito.it/annunci-veneto/vendita/appartamenti/padova/abano-terme/?q=casa&ps=50000&pe=190000&szs=100"
 
 // Here starts everything
 bot.onText(/\/start/, (msg) => {
@@ -55,7 +55,7 @@ bot.onText(/\/start/, (msg) => {
             "users.txt",
             usersFile + msg.chat.id + "\n",
             "utf-8",
-            function (err) {
+            function(err) {
                 if (err) throw err;
                 console.log("UsersAsinc complete");
             }
@@ -64,10 +64,13 @@ bot.onText(/\/start/, (msg) => {
 
     bot.sendMessage(
         msg.chat.id,
-        "Welcome " + msg.from.first_name + ", Notifiche On!",
-        {
+        "Welcome " + msg.from.first_name + ", Notifiche On!", {
             reply_markup: {
-                keyboard: [[IMMOBILIARE], [CASE], [SUBITO]],
+                keyboard: [
+                    [IMMOBILIARE],
+                    [CASE],
+                    [SUBITO]
+                ],
             },
         }
     );
@@ -113,13 +116,19 @@ bot.on("message", (msg) => {
     }
 });
 
+
+
+
+
+
+
 /**
  * CronTab Immobiliare.i
  */
 cron.schedule("*/15 8-21 * * *", () => {
     // Immobiliare.it ##################################################################################################################
 
-console.log("Crontab In")
+    console.log("Crontab In")
 
     var finalImobiliareURL = "";
 
@@ -138,7 +147,7 @@ console.log("Crontab In")
 
                 var links = [];
                 var img = [];
-                let main = $(".listing-item ").each(function () {
+                let main = $(".listing-item ").each(function() {
                     const t = $(this).find("a[data-row-link]");
 
                     if (t.attr("href") !== undefined && t.attr("href")) {
@@ -159,7 +168,7 @@ console.log("Crontab In")
                             "immobiliare.txt",
                             contents + el + "\n",
                             "utf-8",
-                            function (err) {
+                            function(err) {
                                 if (err) throw err;
                             }
                         );
@@ -168,7 +177,7 @@ console.log("Crontab In")
                         var lineReader = readline.createInterface({
                             input: require("fs").createReadStream("users.txt"),
                         });
-                        lineReader.on("line", function (line) {
+                        lineReader.on("line", function(line) {
                             if (line !== "") bot.sendMessage(line, el);
                         });
                     }
@@ -196,7 +205,7 @@ console.log("Crontab In")
 
                 var links = [];
                 var img = [];
-                let main = $(".listing-item ").each(function () {
+                let main = $(".listing-item ").each(function() {
                     const t = $(this).find("a[data-row-link]");
 
                     if (t.attr("href") !== undefined && t.attr("href")) {
@@ -216,7 +225,7 @@ console.log("Crontab In")
                             "immobiliare.txt",
                             contents + el + "\n",
                             "utf-8",
-                            function (err) {
+                            function(err) {
                                 if (err) throw err;
                             }
                         );
@@ -225,7 +234,7 @@ console.log("Crontab In")
                         var lineReader = readline.createInterface({
                             input: require("fs").createReadStream("users.txt"),
                         });
-                        lineReader.on("line", function (line) {
+                        lineReader.on("line", function(line) {
                             if (line !== "") bot.sendMessage(line, el);
                         });
                     }
@@ -246,7 +255,7 @@ console.log("Crontab In")
 
                 var links = [];
 
-                let main = $("article").each(function () {
+                let main = $("article").each(function() {
                     const t = $(this).find("a[title]");
 
                     if (t.attr("href") !== undefined && t.attr("href")) {
@@ -264,7 +273,7 @@ console.log("Crontab In")
                             "case.txt",
                             contents + el + "\n",
                             "utf-8",
-                            function (err) {
+                            function(err) {
                                 if (err) throw err;
                             }
                         );
@@ -273,7 +282,7 @@ console.log("Crontab In")
                         var lineReader = readline.createInterface({
                             input: require("fs").createReadStream("users.txt"),
                         });
-                        lineReader.on("line", function (line) {
+                        lineReader.on("line", function(line) {
                             if (line !== "") bot.sendMessage(line, el);
                         });
                     }
@@ -288,7 +297,7 @@ console.log("Crontab In")
 
                 var links = [];
 
-                let main = $("article").each(function () {
+                let main = $("article").each(function() {
                     const t = $(this).find("a[title]");
 
                     if (t.attr("href") !== undefined && t.attr("href")) {
@@ -306,7 +315,7 @@ console.log("Crontab In")
                             "case.txt",
                             contents + el + "\n",
                             "utf-8",
-                            function (err) {
+                            function(err) {
                                 if (err) throw err;
                             }
                         );
@@ -315,7 +324,7 @@ console.log("Crontab In")
                         var lineReader = readline.createInterface({
                             input: require("fs").createReadStream("users.txt"),
                         });
-                        lineReader.on("line", function (line) {
+                        lineReader.on("line", function(line) {
                             if (line !== "") bot.sendMessage(line, el);
                         });
                     }
@@ -331,7 +340,7 @@ console.log("Crontab In")
 
                 var links = [];
 
-                let main = $("article").each(function () {
+                let main = $("article").each(function() {
                     const t = $(this).find("a[title]");
 
                     if (t.attr("href") !== undefined && t.attr("href")) {
@@ -349,7 +358,7 @@ console.log("Crontab In")
                             "case.txt",
                             contents + el + "\n",
                             "utf-8",
-                            function (err) {
+                            function(err) {
                                 if (err) throw err;
                             }
                         );
@@ -358,7 +367,7 @@ console.log("Crontab In")
                         var lineReader = readline.createInterface({
                             input: require("fs").createReadStream("users.txt"),
                         });
-                        lineReader.on("line", function (line) {
+                        lineReader.on("line", function(line) {
                             if (line !== "") bot.sendMessage(line, el);
                         });
                     }
@@ -379,7 +388,7 @@ console.log("Crontab In")
 
             let main = $(
                 "#layout > main > div.jsx-206193370 > div.jsx-206193370.container > div.jsx-206193370.col.items > div.jsx-59941399.container > div.jsx-59941399.items.visible > div"
-            ).each(function () {
+            ).each(function() {
                 const t = $(this).find("a[href]");
 
                 if (t.attr("href") !== undefined && t.attr("href")) {
@@ -397,7 +406,7 @@ console.log("Crontab In")
                         "subito.txt",
                         contents + el + "\n",
                         "utf-8",
-                        function (err) {
+                        function(err) {
                             if (err) throw err;
                         }
                     );
@@ -406,7 +415,7 @@ console.log("Crontab In")
                     var lineReader = readline.createInterface({
                         input: require("fs").createReadStream("users.txt"),
                     });
-                    lineReader.on("line", function (line) {
+                    lineReader.on("line", function(line) {
                         if (line !== "") bot.sendMessage(line, el);
                     });
                 }
@@ -424,7 +433,7 @@ console.log("Crontab In")
 
             let main = $(
                 "#layout > main > div.jsx-206193370 > div.jsx-206193370.container > div.jsx-206193370.col.items > div.jsx-59941399.container > div.jsx-59941399.items.visible > div"
-            ).each(function () {
+            ).each(function() {
                 const t = $(this).find("a[href]");
 
                 if (t.attr("href") !== undefined && t.attr("href")) {
@@ -442,7 +451,7 @@ console.log("Crontab In")
                         "subito.txt",
                         contents + el + "\n",
                         "utf-8",
-                        function (err) {
+                        function(err) {
                             if (err) throw err;
                         }
                     );
@@ -451,7 +460,7 @@ console.log("Crontab In")
                     var lineReader = readline.createInterface({
                         input: require("fs").createReadStream("users.txt"),
                     });
-                    lineReader.on("line", function (line) {
+                    lineReader.on("line", function(line) {
                         if (line !== "") bot.sendMessage(line, el);
                     });
                 }
@@ -470,7 +479,7 @@ console.log("Crontab In")
 
             let main = $(
                 "#layout > main > div.jsx-206193370 > div.jsx-206193370.container > div.jsx-206193370.col.items > div.jsx-59941399.container > div.jsx-59941399.items.visible > div"
-            ).each(function () {
+            ).each(function() {
                 const t = $(this).find("a[href]");
 
                 if (t.attr("href") !== undefined && t.attr("href")) {
@@ -488,7 +497,7 @@ console.log("Crontab In")
                         "subito.txt",
                         contents + el + "\n",
                         "utf-8",
-                        function (err) {
+                        function(err) {
                             if (err) throw err;
                         }
                     );
@@ -497,7 +506,7 @@ console.log("Crontab In")
                     var lineReader = readline.createInterface({
                         input: require("fs").createReadStream("users.txt"),
                     });
-                    lineReader.on("line", function (line) {
+                    lineReader.on("line", function(line) {
                         if (line !== "") bot.sendMessage(line, el);
                     });
                 }

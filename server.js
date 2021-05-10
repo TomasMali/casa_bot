@@ -10,6 +10,7 @@ const bot = new TelegramBot(token, { polling: true });
 exports.bot = bot;
 
 var cron = require("node-cron");
+const { time } = require("console");
 
 const IMMOBILIARE = "\ud83d\udde3 Immobiliare.it";
 const SUBITO = "\ud83d\udde3 Subito.it";
@@ -125,7 +126,7 @@ bot.on("message", (msg) => {
 /**
  * CronTab Immobiliare.i
  */
-cron.schedule("*/15 8-21 * * *", () => {
+cron.schedule("*/5 8-21 * * *", () => {
     // Immobiliare.it ##################################################################################################################
 
     console.log("Crontab In")
@@ -178,7 +179,10 @@ cron.schedule("*/15 8-21 * * *", () => {
                             input: require("fs").createReadStream("users.txt"),
                         });
                         lineReader.on("line", function(line) {
-                            if (line !== "") bot.sendMessage(line, el);
+                            if (line !== "") {
+                                console.log("Imobiliare Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                bot.sendMessage(line, el)
+                            };
                         });
                     }
                 });
@@ -235,7 +239,10 @@ cron.schedule("*/15 8-21 * * *", () => {
                             input: require("fs").createReadStream("users.txt"),
                         });
                         lineReader.on("line", function(line) {
-                            if (line !== "") bot.sendMessage(line, el);
+                            if (line !== "") {
+                                console.log("Imobiliare Abano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                bot.sendMessage(line, el)
+                            };
                         });
                     }
                 });
@@ -283,7 +290,10 @@ cron.schedule("*/15 8-21 * * *", () => {
                             input: require("fs").createReadStream("users.txt"),
                         });
                         lineReader.on("line", function(line) {
-                            if (line !== "") bot.sendMessage(line, el);
+                            if (line !== "") {
+                                console.log("Casa Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                bot.sendMessage(line, el)
+                            };
                         });
                     }
                 });
@@ -325,7 +335,10 @@ cron.schedule("*/15 8-21 * * *", () => {
                             input: require("fs").createReadStream("users.txt"),
                         });
                         lineReader.on("line", function(line) {
-                            if (line !== "") bot.sendMessage(line, el);
+                            if (line !== "") {
+                                console.log("Case,it Padova user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                bot.sendMessage(line, el)
+                            };
                         });
                     }
                 });
@@ -368,7 +381,10 @@ cron.schedule("*/15 8-21 * * *", () => {
                             input: require("fs").createReadStream("users.txt"),
                         });
                         lineReader.on("line", function(line) {
-                            if (line !== "") bot.sendMessage(line, el);
+                            if (line !== "") {
+                                console.log("Casa Abano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                bot.sendMessage(line, el)
+                            };
                         });
                     }
                 });
@@ -416,7 +432,10 @@ cron.schedule("*/15 8-21 * * *", () => {
                         input: require("fs").createReadStream("users.txt"),
                     });
                     lineReader.on("line", function(line) {
-                        if (line !== "") bot.sendMessage(line, el);
+                        if (line !== "") {
+                            console.log("Subito user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                            bot.sendMessage(line, el)
+                        };
                     });
                 }
             });
@@ -461,7 +480,10 @@ cron.schedule("*/15 8-21 * * *", () => {
                         input: require("fs").createReadStream("users.txt"),
                     });
                     lineReader.on("line", function(line) {
-                        if (line !== "") bot.sendMessage(line, el);
+                        if (line !== "") {
+                            console.log("Subito Padova user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                            bot.sendMessage(line, el)
+                        };
                     });
                 }
             });
@@ -507,7 +529,10 @@ cron.schedule("*/15 8-21 * * *", () => {
                         input: require("fs").createReadStream("users.txt"),
                     });
                     lineReader.on("line", function(line) {
-                        if (line !== "") bot.sendMessage(line, el);
+                        if (line !== "") {
+                            console.log("Subito Abano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                            bot.sendMessage(line, el)
+                        };
                     });
                 }
             });

@@ -20,9 +20,9 @@ const IDEALISTA = "\ud83d\udde3 Idealista.it";
 inline_keyboard = [];
 
 // Imobiliare
-const immobiliareLink =
+const immobiliareSelvazzanoLink =
     "https://www.immobiliare.it/vendita-case/selvazzano-dentro/?criterio=rilevanza&prezzoMinimo=50000&prezzoMassimo=190000&superficieMinima=100&idMZona[]=11150&idMZona[]=11149&idMZona[]=11148&idMZona[]=104&idMZona[]=105";
-const immobiliarePageNexts =
+const immobiliareSelvazzanoPageNexts =
     "https://www.immobiliare.it/vendita-case/selvazzano-dentro/?criterio=rilevanza&prezzoMinimo=50000&prezzoMassimo=190000&superficieMinima=100&idMZona[]=11150&idMZona[]=11149&idMZona[]=11148&idMZona[]=104&idMZona[]=105&pag=";
 
 const immobiliareAbanoLink =
@@ -128,21 +128,21 @@ bot.on("message", (msg) => {
  */
 cron.schedule("*/5 8-21 * * *", () => {
     // Immobiliare.it ##################################################################################################################
+    console.log("Current timestamp Cron " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString())
 
-    console.log("Crontab In")
 
-    var finalImobiliareURL = "";
+    var finalImobiliareSelvazzanoURL = "";
 
     for (let i = 1; i < 5; i++) {
         if (i > 1) {
-            finalImobiliareURL = immobiliarePageNexts + i.toString();
+            finalImobiliareSelvazzanoURL = immobiliareSelvazzanoPageNexts + i.toString();
         }
         // first page
         else {
-            finalImobiliareURL = immobiliareLink;
+            finalImobiliareSelvazzanoURL = immobiliareSelvazzanoLink;
         }
 
-        request(finalImobiliareURL, (error, response, html) => {
+        request(finalImobiliareSelvazzanoURL, (error, response, html) => {
             if (!error && response.statusCode == 200) {
                 const $ = cheerio.load(html);
 
@@ -167,20 +167,27 @@ cron.schedule("*/5 8-21 * * *", () => {
                     if (contents.toString().indexOf(el.toString()) === -1) {
                         fs.writeFileSync(
                             "immobiliare.txt",
-                            contents + el + "\n",
+                            contents + el + "   " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n",
                             "utf-8",
                             function(err) {
                                 if (err) throw err;
                             }
                         );
 
+
+                        console.log("Ho scritto \n")
+
                         // Send bradcast
                         var lineReader = readline.createInterface({
                             input: require("fs").createReadStream("users.txt"),
                         });
+
+
+
+
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Imobiliare Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                console.log("Imobiliare Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -227,7 +234,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                     if (contents.toString().indexOf(el.toString()) === -1) {
                         fs.writeFileSync(
                             "immobiliare.txt",
-                            contents + el + "\n",
+                            contents + el + "   " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n",
                             "utf-8",
                             function(err) {
                                 if (err) throw err;
@@ -240,7 +247,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                         });
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Imobiliare Abano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                console.log("Imobiliare Abano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -278,7 +285,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                     if (contents.toString().indexOf(el.toString()) === -1) {
                         fs.writeFileSync(
                             "case.txt",
-                            contents + el + "\n",
+                            contents + el + "    " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n",
                             "utf-8",
                             function(err) {
                                 if (err) throw err;
@@ -291,7 +298,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                         });
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Casa Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                console.log("Casa Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -323,7 +330,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                     if (contents.toString().indexOf(el.toString()) === -1) {
                         fs.writeFileSync(
                             "case.txt",
-                            contents + el + "\n",
+                            contents + el + "   " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n",
                             "utf-8",
                             function(err) {
                                 if (err) throw err;
@@ -336,7 +343,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                         });
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Case,it Padova user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                console.log("Case,it Padova user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -369,7 +376,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                     if (contents.toString().indexOf(el.toString()) === -1) {
                         fs.writeFileSync(
                             "case.txt",
-                            contents + el + "\n",
+                            contents + el + "   " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n",
                             "utf-8",
                             function(err) {
                                 if (err) throw err;
@@ -382,7 +389,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                         });
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Casa Abano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                                console.log("Casa Abano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -420,7 +427,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                 if (contents.toString().indexOf(el.toString()) === -1) {
                     fs.writeFileSync(
                         "subito.txt",
-                        contents + el + "\n",
+                        contents + el + "   " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n",
                         "utf-8",
                         function(err) {
                             if (err) throw err;
@@ -433,7 +440,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                     });
                     lineReader.on("line", function(line) {
                         if (line !== "") {
-                            console.log("Subito user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                            console.log("Subito user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                             bot.sendMessage(line, el)
                         };
                     });
@@ -468,7 +475,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                 if (contents.toString().indexOf(el.toString()) === -1) {
                     fs.writeFileSync(
                         "subito.txt",
-                        contents + el + "\n",
+                        contents + el + "   " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n",
                         "utf-8",
                         function(err) {
                             if (err) throw err;
@@ -481,7 +488,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                     });
                     lineReader.on("line", function(line) {
                         if (line !== "") {
-                            console.log("Subito Padova user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                            console.log("Subito Padova user=" + line + "  Link=" + el + "  " + +new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                             bot.sendMessage(line, el)
                         };
                     });
@@ -517,7 +524,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                 if (contents.toString().indexOf(el.toString()) === -1) {
                     fs.writeFileSync(
                         "subito.txt",
-                        contents + el + "\n",
+                        contents + el + "   " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n",
                         "utf-8",
                         function(err) {
                             if (err) throw err;
@@ -530,7 +537,7 @@ cron.schedule("*/5 8-21 * * *", () => {
                     });
                     lineReader.on("line", function(line) {
                         if (line !== "") {
-                            console.log("Subito Abano user=" + line + "  Link=" + el + "  " + new Date().toISOString() + "\n")
+                            console.log("Subito Abano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                             bot.sendMessage(line, el)
                         };
                     });

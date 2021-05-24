@@ -128,7 +128,7 @@ bot.on("message", (msg) => {
 /**
  * CronTab Immobiliare.i
  */
-cron.schedule("*/1 8-21 * * *", () => {
+cron.schedule("*/1 8-22 * * *", () => {
     // Immobiliare.it ##################################################################################################################
     console.log("Current timestamp Cron " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString())
 

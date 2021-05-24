@@ -201,6 +201,84 @@ cron.schedule("*/3 8-21 * * *", () => {
 
     //##################################################################################################################
 
+
+    const myHomeLink =
+        "https://www.myhomegroup.it/it/cerca?sch_contratto=9&sch_comune%5B%5D=1&sch_comune%5B%5D=5398&sch_comune%5B%5D=6005&sch_comune%5B%5D=6775&sch_categoria%5B%5D=11&sch_categoria%5B%5D=2&sch_categoria%5B%5D=4&sch_categoria%5B%5D=1&sch_categoria%5B%5D=15&sch_categoria%5B%5D=3&sch_camere=3&price_max=170000&mq_min=100&agency_code=&sch_agenzia=&page=";
+
+
+    var finalMyHomeURL = "";
+
+    for (let i = 1; i < 5; i++) {
+        //  console.log(i + "\n")
+        finalMyHomeURL = myHomeLink + i.toString();
+
+
+
+
+        request(finalMyHomeURL, (error, response, html) => {
+            if (!error && response.statusCode == 200) {
+                const $ = cheerio.load(html);
+
+                var links = [];
+                var img = [];
+
+                // console.log(cheerio.load(html).html())
+
+                let main = $("div.row").each(function() {
+
+                    const t = $(this).find("a");
+
+                    // https://www.myhomegroup.it/
+
+                    if (t.attr("href") !== undefined && t.attr("href")) {
+                        var elemento = t.attr("href");
+                        if (elemento.startsWith("/it/")) {
+                            //    console.log(elemento)
+                            links.push("https://www.myhomegroup.it" + elemento);
+                        }
+                    }
+
+                });
+                links.shift()
+                    //   console.log(links)
+
+                // Check all the links if it is a new one
+                links.forEach((el) => {
+                    var contents = fs.readFileSync("myhome.txt", "utf8");
+                    // check if a line is not included
+                    if (contents.toString().indexOf(el.toString()) === -1) {
+                        fs.writeFileSync(
+                            "myhome.txt",
+                            contents + el + "   " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n",
+                            "utf-8",
+                            function(err) {
+                                if (err) throw err;
+                            }
+                        );
+
+                        // Send bradcast
+                        var lineReader = readline.createInterface({
+                            input: require("fs").createReadStream("users.txt"),
+                        });
+                        lineReader.on("line", function(line) {
+                            if (line !== "") {
+                                console.log("MyHome Selvazzano=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                                bot.sendMessage(line, el)
+                            };
+                        });
+                    }
+                });
+
+
+            }
+        });
+    }
+
+
+
+
+    //##################################################################################################################
+
     var finalImobiliareAbanoURL = "";
 
     for (let i = 1; i < 5; i++) {

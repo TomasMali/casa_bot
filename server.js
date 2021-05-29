@@ -6,7 +6,7 @@ const readline = require("readline");
 const TelegramBot = require("node-telegram-bot-api");
 //E-das Token
 //const token = "1382962316:AAHI9DmkxWm0RfZsFBTKR_PMXJFSUai7i-E";
-const token = "1801365851:AAFuMlEnIxlHt-QqzzWlwo68NTScv1zXoxc";
+const token = "1820640460:AAGY99MUt-mhQUELHGsy-fnNOHoCUiA9pBo";
 
 const bot = new TelegramBot(token, { polling: true });
 exports.bot = bot;

@@ -60,7 +60,7 @@ bot.onText(/\/start/, (msg) => {
             "utf-8",
             function(err) {
                 if (err) throw err;
-                console.log("UsersAsinc complete");
+            //    console.log("UsersAsinc complete");
             }
         );
     }
@@ -130,7 +130,7 @@ bot.on("message", (msg) => {
  */
 cron.schedule("*/1 8-23 * * *", () => {
     // Immobiliare.it ##################################################################################################################
-    console.log("Current timestamp Cron " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString())
+  //  console.log("Current timestamp Cron " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString())
 
 
     var finalImobiliareSelvazzanoURL = "";
@@ -177,7 +177,7 @@ cron.schedule("*/1 8-23 * * *", () => {
                         );
 
 
-                        console.log("Ho scritto \n")
+                      //  console.log("Ho scritto \n")
 
                         // Send bradcast
                         var lineReader = readline.createInterface({
@@ -189,7 +189,7 @@ cron.schedule("*/1 8-23 * * *", () => {
 
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Imobiliare Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                           //     console.log("Imobiliare Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -262,7 +262,7 @@ cron.schedule("*/1 8-23 * * *", () => {
                         });
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("MyHome Selvazzano=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                      //          console.log("MyHome Selvazzano=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -327,7 +327,7 @@ cron.schedule("*/1 8-23 * * *", () => {
                         });
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Imobiliare Abano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                    //            console.log("Imobiliare Abano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -378,7 +378,7 @@ cron.schedule("*/1 8-23 * * *", () => {
                         });
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Casa Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                             //   console.log("Casa Selvazzano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -423,7 +423,7 @@ cron.schedule("*/1 8-23 * * *", () => {
                         });
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Case,it Padova user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                           //     console.log("Case,it Padova user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -469,7 +469,7 @@ cron.schedule("*/1 8-23 * * *", () => {
                         });
                         lineReader.on("line", function(line) {
                             if (line !== "") {
-                                console.log("Casa Abano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                         //       console.log("Casa Abano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                                 bot.sendMessage(line, el)
                             };
                         });
@@ -483,7 +483,7 @@ cron.schedule("*/1 8-23 * * *", () => {
 
     // Subito.it ##################################################################################################################
     request(subitoUrl, (error, response, html) => {
-        console.log(response.statusCode);
+    //    console.log(response.statusCode);
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
 
@@ -520,7 +520,7 @@ cron.schedule("*/1 8-23 * * *", () => {
                     });
                     lineReader.on("line", function(line) {
                         if (line !== "") {
-                            console.log("Subito user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                        //    console.log("Subito user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                             bot.sendMessage(line, el)
                         };
                     });
@@ -531,7 +531,7 @@ cron.schedule("*/1 8-23 * * *", () => {
 
     // Subito.it Padova Anche  ##################################################################################################################
     request(subitoPadovaAnche, (error, response, html) => {
-        console.log(response.statusCode);
+  //      console.log(response.statusCode);
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
 
@@ -568,7 +568,7 @@ cron.schedule("*/1 8-23 * * *", () => {
                     });
                     lineReader.on("line", function(line) {
                         if (line !== "") {
-                            console.log("Subito Padova user=" + line + "  Link=" + el + "  " + +new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                    //        console.log("Subito Padova user=" + line + "  Link=" + el + "  " + +new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                             bot.sendMessage(line, el)
                         };
                     });
@@ -580,7 +580,7 @@ cron.schedule("*/1 8-23 * * *", () => {
 
     // Subito.it Abano Terme  ##################################################################################################################
     request(subitoAbano, (error, response, html) => {
-        console.log(response.statusCode);
+   //     console.log(response.statusCode);
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
 
@@ -617,7 +617,7 @@ cron.schedule("*/1 8-23 * * *", () => {
                     });
                     lineReader.on("line", function(line) {
                         if (line !== "") {
-                            console.log("Subito Abano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
+                   //         console.log("Subito Abano user=" + line + "  Link=" + el + "  " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString() + "\n")
                             bot.sendMessage(line, el)
                         };
                     });

@@ -128,9 +128,9 @@ bot.on("message", (msg) => {
 /**
  * CronTab Immobiliare.i
  */
-cron.schedule("*/1 8-23 * * *", () => {
+cron.schedule("*/1 8-22 * * *", () => {
     // Immobiliare.it ##################################################################################################################
-  //  console.log("Current timestamp Cron " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString())
+    console.log("Current timestamp Cron " + new Date().toLocaleDateString() + "  " + new Date().toLocaleTimeString())
 
 
     var finalImobiliareSelvazzanoURL = "";
@@ -152,6 +152,8 @@ cron.schedule("*/1 8-23 * * *", () => {
                 var img = [];
                 let main = $(".listing-item ").each(function() {
                     const t = $(this).find("a[data-row-link]");
+
+                  //  console.log(t.attr("href"))
 
                     if (t.attr("href") !== undefined && t.attr("href")) {
                         var elemento = t.attr("href");
@@ -627,4 +629,7 @@ cron.schedule("*/1 8-23 * * *", () => {
     });
 
 
+},{
+    scheduled: true,
+    timezone: "Europe/Rome"
 });
